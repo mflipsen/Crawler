@@ -4,6 +4,8 @@ from domain import get_domain_name
 from general import create_project_dir, create_data_files
 from general import set_to_file, file_to_set
 
+# code adopted from 
+# https://github.com/AbdulSheikh/Spider/tree/master/Spider
 
 class Spider:
 
