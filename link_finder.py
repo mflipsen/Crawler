@@ -1,3 +1,6 @@
+# the following code was adopted from
+# https://github.com/AbdulSheikh/Spider/tree/master/Spider
+
 from html.parser import HTMLParser
 from urllib import parse
 
