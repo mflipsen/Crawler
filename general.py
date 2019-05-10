@@ -1,9 +1,60 @@
 import os
-# import sys
 import pickle
 import contextlib
 from pathlib import Path
 from setup import case, query, maxresults, maxthreads, datetime
+
+# Pickle file
+def pickle_file(path, data):
+    with open(path, "wb") as filehandle:
+        pickle.dump(data, filehandle)
+
+
+# Create file with setup specifications
+def create_setup():
+    with open("setup.txt", "w") as file:
+        file.write("# Directory settings" + '\n' +
+                   "case = " + case + '\n' + '\n' +
+                   "# Date and time of running program" + '\n' +
+                   datetime + '\n' + '\n' +
+                   "# Googler settings" + '\n' +
+                   "query = " + query + '\n' +
+                   "maxresults = " + str(maxresults) + '\n' + '\n' +
+                   "# Crawler settings" + '\n' +
+                   "maxthreads = " + str(maxthreads))
+        
+
+# Functions to use in program to change to specific directories
+def dir_Crawler(base):
+    change_cd(base)
+
+
+def dir_case(base, case):
+    change_cd(base)
+    temp = Path.cwd().joinpath(case)
+    change_cd(temp)
+
+
+def dir_crawled(base, case):
+    change_cd(base)
+    temp = Path.cwd().joinpath(case)
+    change_cd(temp)
+    folder = case + '_crawler'
+    temp1 = Path.cwd().joinpath(folder)
+    change_cd(temp1)
+
+
+def dir_scrapelist(base, case):
+    change_cd(base)
+    temp = Path.cwd().joinpath(case)
+    change_cd(temp)
+    folder = case + '_scraper'
+    temp1 = Path.cwd().joinpath(folder)
+    change_cd(temp1)
+
+
+# the following code was adopted from
+# https://github.com/AbdulSheikh/Spider/tree/master/Spider
 
 
 # Create a folder
@@ -55,25 +106,9 @@ def create_data_files(project_name, base_url):
     if not os.path.isfile(crawled):
         write_file(crawled, '')
 
-
-# Pickle file
-def pickle_file(path, data):
-    with open(path, "wb") as filehandle:
-        pickle.dump(data, filehandle)
-
-
-# Create file with setup specifications
-def create_setup():
-    with open("setup.txt", "w") as file:
-        file.write("# Directory settings" + '\n' +
-                   "case = " + case + '\n' + '\n' +
-                   "# Date and time of running program" + '\n' +
-                   datetime + '\n' + '\n' +
-                   "# Googler settings" + '\n' +
-                   "query = " + query + '\n' +
-                   "maxresults = " + str(maxresults) + '\n' + '\n' +
-                   "# Crawler settings" + '\n' +
-                   "maxthreads = " + str(maxthreads))
+        
+# the following code is an adaptation of code from
+# http://kitchingroup.cheme.cmu.edu/blog/2013/06/16/Automatic-temporary-directory-changing/     
 
 
 # Context manager to handle changes in directory
@@ -97,32 +132,3 @@ def change_cd(path):
     with cd(path):
         # print(os.listdir('.'))
         raise Exception('boom')
-
-
-# Functions to use in program to change to specific directories
-def dir_Crawler(base):
-    change_cd(base)
-
-
-def dir_case(base, case):
-    change_cd(base)
-    temp = Path.cwd().joinpath(case)
-    change_cd(temp)
-
-
-def dir_crawled(base, case):
-    change_cd(base)
-    temp = Path.cwd().joinpath(case)
-    change_cd(temp)
-    folder = case + '_crawler'
-    temp1 = Path.cwd().joinpath(folder)
-    change_cd(temp1)
-
-
-def dir_scrapelist(base, case):
-    change_cd(base)
-    temp = Path.cwd().joinpath(case)
-    change_cd(temp)
-    folder = case + '_scraper'
-    temp1 = Path.cwd().joinpath(folder)
-    change_cd(temp1)
