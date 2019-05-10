@@ -1,4 +1,4 @@
-# code adopted from
+# the following code was adopted from
 # https://github.com/AbdulSheikh/Spider/tree/master/Spider
 
 from urllib.parse import urlparse
