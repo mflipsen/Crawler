@@ -25,4 +25,4 @@ Optionally, the user can use reader.py to increase readability of the output. Th
 
 
 
-© 2019 Maartje Flipsen, Delft University of Technology
+© 2019 Delft University of Technology
