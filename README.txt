@@ -11,7 +11,7 @@ The entire program contains the following scripts:
 - domain.py	    	      	# supports crawler.py
 - general.py	        		# supports crawler.py
 - scraper.py	  	       	# main script for scraping crawled websites and processing data
-- reader.py		    	      # optional script for creating text files per keyword after the Crawler has run.
+- reader.py		    	      # optional script for creating text files per keyword after the Crawler has run
 
 Supporting (alterable) files:
 - html.text_elements.csv	# supports scraper.py, can be changed by the user 
