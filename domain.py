@@ -1,3 +1,6 @@
+# code adopted from
+# https://github.com/AbdulSheikh/Spider/tree/master/Spider
+
 from urllib.parse import urlparse
 
 
