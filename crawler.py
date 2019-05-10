@@ -45,7 +45,8 @@ def crawl_case():
 # Customized threading object
 # =============================================================================
 
-
+# adaptation of code from 
+# https://www.oreilly.com/library/view/python-cookbook/0596001673/ch06s03.html
 class myThread(threading.Thread):
 
     def __init__(self, threadID, name):
@@ -77,7 +78,8 @@ class myThread(threading.Thread):
 # Supporting crawler functions
 # =============================================================================
 
-
+# adaptation of code from
+# https://github.com/AbdulSheikh/Spider/tree/master/Spider
 # Create worker threads (will die when main exits)
 def create_workers():
     for i in range(maxthreads):
