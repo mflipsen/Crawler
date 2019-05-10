@@ -27,7 +27,8 @@ def read_information():
     df2 = df[df.index.map(lambda x: str(x) not in empty)]
 
     # join all columns into one
-    ser = df2.iloc[:, 0:136].apply(lambda x: '\n'.join(x.map(str)), axis=1)
+    cols = len(df.columns)
+    ser = df2.iloc[:, 0:cols].apply(lambda x: '\n'.join(x.map(str)), axis=1)
 
     # for each keyword, create separate text file
     for i, j in ser.iteritems():
