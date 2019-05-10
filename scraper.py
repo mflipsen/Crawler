@@ -114,7 +114,8 @@ def scrape_scrapelist():
             time.sleep(5)
 
         # in case of errors continue with next url in scrape_list
-        # (open source code)
+        # adaptation of code from
+        # https://stackoverflow.com/questions/16511337/correct-way-to-try-except-using-python-requests-module
         except requests.exceptions.RequestException as err:
             print("RequestException: ", err)
             continue
@@ -310,6 +311,8 @@ def store_data(d, path):
 
 
 # Collects contact information from scraped text
+# code adopted from
+# https://www.tutorialspoint.com/python/python_extract_emails_from_text.htm
 def find_contacts():
     for row in sentences:
         reg = r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+"
