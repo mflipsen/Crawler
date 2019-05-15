@@ -2,7 +2,7 @@ This program was created as part of my MSc Thesis project to obtain the degree o
 
 # INPUT
 The entire program contains the following scripts:
-- run.py			             # run the script to crawl and scrape for the case
+- run.py			            # run the script to crawl and scrape for the case
 - setup.py			          # enter case name, and set preferences for the crawler
 - crawler.py		  	      # main script for crawling case websites
 - googler.py		  	      # supports crawler.py
