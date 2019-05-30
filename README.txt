@@ -17,7 +17,7 @@ Supporting (alterable) files:
 
 # OUTPUT
 For each case, the program creates a directory containing folders for resp. the crawl and scrape output. 
-The program output is stored as a docx-file in the case directory. 
+The program output is stored as a docx-file in the case directory. As part of the content analysis, a word frequency plot is generated and stored in the case directory as well.
 
 
 
