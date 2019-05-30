@@ -3,6 +3,8 @@ import csv
 import docx
 import time
 import requests
+import pandas as pd
+import matplotlib.pyplot as plt
 from pathlib import Path
 from bs4 import BeautifulSoup
 from setup import case, base
@@ -143,6 +145,14 @@ def freq_count():
     words = [word for word in word_tokenize(all_words) if word.isalpha()]
     words = [w for w in words if not w in (stopwords_en or stopwords_nl)]
 
-    # plot frequency
+    # create fdist variable and put it in dataframe
     fdist = FreqDist(words)
-    fdist.plot(10, title=case + ' - word frequency', cumulative=False)
+    dfdist = pd.DataFrame(list(fdist.items()), columns=["word", "frequency"])
+    dfdist.index = dfdist['word']
+    df = dfdist.sort_values(by='frequency', ascending=False)
+
+    # plot frequency plot
+    plt.figure()
+    plt.style.use('seaborn-white')
+    df[:25].plot(kind='bar', title=case + ' word frequency plot')
+    plt.savefig('word frequency plot.png', bbox_inches='tight', dpi=200)
