@@ -14,6 +14,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.probability import FreqDist
 
+plt.style.use('seaborn-white')
+
 directory_list = []
 scrape_list = []
 folder = case + '_scraper'
@@ -79,13 +81,25 @@ def create_scrapelist():
     dir_case(base, case)
 
 
+# Code adopted from: 
+# https://stackoverflow.com/questions/8733233/filtering-out-certain-bytes-in-python
+def valid_xml_char_ordinal(c):
+    codepoint = ord(c)
+    # conditions ordered by presumed frequency
+    return (0x20 <= codepoint <= 0xD7FF or
+            codepoint in (0x9, 0xA, 0xD) or
+            0xE000 <= codepoint <= 0xFFFD or
+            0x10000 <= codepoint <= 0x10FFFF)
+
+
 def store_data(data, path):
     dir_case(base, case)
     doc = docx.Document()
     doc.add_heading(case, level=0)
     for url, pars in data.items():
+        cleaned_string = ''.join(c for c in pars if valid_xml_char_ordinal(c))
         doc.add_heading(url, level=1)
-        doc.add_paragraph(pars)
+        doc.add_paragraph(cleaned_string)
     doc.save(path)
 
 
