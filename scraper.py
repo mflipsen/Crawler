@@ -115,7 +115,6 @@ def scrape_scrapelist():
             r = requests.get(url, timeout=1)
             r.raise_for_status()
             soup = BeautifulSoup(r.content, "html.parser")
-            time.sleep(5)
 
             # retrieve text for all 'p' tags in the soup
             pars = [''.join(s.findAll(text=True)) for s in soup.findAll('p')]
@@ -126,6 +125,7 @@ def scrape_scrapelist():
                         scrapedata[url] = ' '.join(tags)
             else:
                 scrapedata[url] = ' '.join(pars)
+            time.sleep(10)
 
         except requests.exceptions.RequestException as err:
             print("RequestException: ", err)
