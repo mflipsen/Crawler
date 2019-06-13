@@ -4,7 +4,6 @@ import docx
 import time
 import requests
 import pandas as pd
-import matplotlib.pyplot as plt
 from pathlib import Path
 from bs4 import BeautifulSoup
 from setup import case, base
@@ -12,9 +11,6 @@ from general import pickle_file, create_project_dir
 from general import dir_case, dir_Crawler, dir_scrapelist, dir_crawled
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
-from nltk.probability import FreqDist
-
-plt.style.use('seaborn-white')
 
 directory_list = []
 scrape_list = []
@@ -34,7 +30,6 @@ def scrape_case():
     create_tagslist()
     create_scrapelist()
     scrape_scrapelist()
-    freq_count()
 
 
 # =============================================================================
@@ -146,27 +141,3 @@ def scrape_scrapelist():
 
     # store casedata to file in case directory
     store_data(scrapedata, "casedata.docx")
-
-
-def freq_count():
-    global scrapedata
-
-    # get the words from all urls together
-    all_words = [''.join(text) for text in scrapedata.values()]
-    all_words = ' '.join(all_words)
-
-    # remove non-words and stopwords
-    words = [word for word in word_tokenize(all_words) if word.isalpha()]
-    words = [w for w in words if not w in (stopwords_en or stopwords_nl)]
-
-    # create fdist variable and put it in dataframe
-    fdist = FreqDist(words)
-    dfdist = pd.DataFrame(list(fdist.items()), columns=["word", "frequency"])
-    dfdist.index = dfdist['word']
-    df = dfdist.sort_values(by='frequency', ascending=False)
-
-    # plot frequency plot
-    plt.figure()
-    plt.style.use('seaborn-white')
-    df[:25].plot(kind='bar', title=case + ' word frequency plot')
-    plt.savefig('word frequency plot.png', bbox_inches='tight', dpi=200)
